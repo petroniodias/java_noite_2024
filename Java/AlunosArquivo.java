@@ -28,8 +28,8 @@ public class AlunosArquivo {
 
                 String[] texto = linha.split(";");
                 nome[i] = texto[0];
-                // nota1[i] = texto[1];
-                // nota2[i] = texto[2];
+                nota1[i] = Double.parseDouble(texto[1]);
+                nota2[i] = Double.parseDouble(texto[2]);
                 i++;
             }
         } catch (IOException e) {

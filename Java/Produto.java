@@ -84,6 +84,10 @@ public class Produto {
                         gravarNoArquivo(arquivo, linha);
                     }
                     break;
+
+                case 5:
+                    System.out.println("Até mais.");
+                    break;
                 default: 
                     System.out.println("Opção inválida");
             }

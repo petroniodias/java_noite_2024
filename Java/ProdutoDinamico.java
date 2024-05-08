@@ -85,6 +85,9 @@ public class ProdutoDinamico {
                         System.out.println("Erro ao gravar no arquivo: " + e.getMessage());
                     }
                     break;
+                case 5:
+                    System.out.println("Até mais.");
+                    break;
                 default: 
                     System.out.println("Opção inválida");
             }

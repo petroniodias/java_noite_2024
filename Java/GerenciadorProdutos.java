@@ -12,16 +12,16 @@ class Produto {
     private String unidade;
     private int quantidade;
     private double preco;
-    private String grupo;
 
-    public Produto(String nome, String unidade, String grupo, int quantidade, double preco) {
+    // Construtor
+    public Produto(String nome, String unidade, int quantidade, double preco) {
         this.nome = nome;
         this.unidade = unidade;
         this.quantidade = quantidade;
         this.preco = preco;
-        this.grupo = grupo;
     }
 
+    // Getters e Setters
     public String getNome() {
         return nome;
     }
@@ -34,81 +34,119 @@ class Produto {
         return quantidade;
     }
 
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
+
     public double getPreco() {
         return preco;
     }
 
-    public String getGrupo() {
-        return grupo;
-    }
-
     @Override
     public String toString() {
-        return nome + ";" + unidade + ";" + grupo + ";" + quantidade + ";" + preco ;
+        return nome + ";" + unidade + ";" + quantidade + ";" + preco;
     }
 }
 
 public class GerenciadorProdutos {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-
         int opcao = 0;
         List<Produto> produtos = new ArrayList<>();
 
-        while (opcao != 5) {
+        while (opcao != 6) {
             System.out.println("1 - Cadastrar produto");
             System.out.println("2 - Listar produtos");
-            System.out.println("3 - Carregar dados");
-            System.out.println("4 - Salvar dados");
-            System.out.println("5 - Sair");
+            System.out.println("3 - Consultar produto");
+            System.out.println("4 - Remover produto");
+            System.out.println("5 - Carregar dados");
+            System.out.println("6 - Salvar e sair");
             System.out.print("Digite uma opção: ");
             opcao = sc.nextInt();
-            sc.nextLine();
+            sc.nextLine(); // Consumir a quebra de linha após a leitura do número
 
             switch (opcao) {
-                case 1:
-                    System.out.print("Digite o nome: ");
-                    String nome = sc.nextLine();
-                    if (nome.equalsIgnoreCase("fim")) {
-                        break;
-                    }
-                    System.out.print("Digite a unidade: ");
-                    String unidade = sc.nextLine();
-                    System.out.print("Digite a grupo: ");
-                    String grupo = sc.nextLine();
-                    System.out.print("Digite a quantidade: ");
-                    int quantidade = sc.nextInt();
-                    System.out.print("Digite o preco: ");
-                    double preco = sc.nextDouble();
-                    sc.nextLine();
-
-                    Produto produto = new Produto(nome, unidade, grupo, quantidade, preco);
-                    produtos.add(produto);
+                case 1: // Cadastrar produto
+                    cadastrarProduto(sc, produtos);
                     break;
-                case 2:
-                    for (Produto p : produtos) {
-                        System.out.println(p.toString());
-                    }
+                case 2: // Listar produtos
+                    listarProdutos(produtos);
                     break;
-                case 3:
-                    // Carregar dados do arquivo
-                    System.out.println("Carregando dados do arquivo...");
+                case 3: // Consultar produto
+                    consultarProduto(sc, produtos);
+                    break;
+                case 4: // Remover produto
+                    removerProduto(sc, produtos);
+                    break;
+                case 5: // Carregar dados do arquivo
                     produtos = carregarDados("produtos.txt");
                     break;
-                case 4:
-                    // Salvar dados no arquivo
-                    System.out.println("Salvando dados no arquivo...");
+                case 6: // Salvar e sair
                     salvarDados("produtos.txt", produtos);
-                    break;
-                case 5:
-                    System.out.println("Saindo...");
                     break;
                 default:
                     System.out.println("Opção inválida");
             }
         }
-
         sc.close();
+    }
+
+    public static void cadastrarProduto(Scanner sc, List<Produto> produtos) {
+        System.out.print("Digite o nome: ");
+        String nome = sc.nextLine();
+        if (nome.equalsIgnoreCase("fim")) {
+            return;
+        }
+        System.out.print("Digite a unidade: ");
+        String unidade = sc.nextLine();
+        System.out.print("Digite a quantidade: ");
+        int qtde = sc.nextInt();
+        System.out.print("Digite o preco: ");
+        double preco = sc.nextDouble();
+        sc.nextLine(); // Consumir a quebra de linha após a leitura do número
+
+        produtos.add(new Produto(nome, unidade, qtde, preco));
+    }
+
+    public static void listarProdutos(List<Produto> produtos) {
+        for (Produto p : produtos) {
+            System.out.println("Nome: " + p.getNome());
+            System.out.println("Unidade: " + p.getUnidade());
+            System.out.println("Quantidade: " + p.getQuantidade());
+            System.out.println("Preço: " + p.getPreco());
+        }
+    }
+
+    public static void consultarProduto(Scanner sc, List<Produto> produtos) {
+        System.out.print("Digite o nome do produto: ");
+        String nome = sc.nextLine();
+        boolean encontrado = false;
+        for (Produto p : produtos) {
+            if (p.getNome().equalsIgnoreCase(nome)) {
+                System.out.println("Nome: " + p.getNome());
+                System.out.println("Unidade: " + p.getUnidade());
+                System.out.println("Quantidade: " + p.getQuantidade());
+                System.out.println("Preço: " + p.getPreco());
+                encontrado = true;
+                break;
+            }
+        }
+        if (!encontrado) {
+            System.out.println("Produto não encontrado.");
+        }
+    }
+
+    public static void removerProduto(Scanner sc, List<Produto> produtos) {
+        System.out.print("Digite o nome do produto a ser removido: ");
+        String nome = sc.nextLine();
+        for (int i = 0; i < produtos.size(); i++) {
+            if (produtos.get(i).getNome().equalsIgnoreCase(nome)) {
+                produtos.remove(i);
+                System.out.println("Produto removido com sucesso.");
+                return;
+            }
+        }
+        System.out.println("Produto não encontrado.");
     }
 
     public static void salvarDados(String arquivo, List<Produto> produtos) {
@@ -129,14 +167,20 @@ public class GerenciadorProdutos {
             String linha;
             while ((linha = reader.readLine()) != null) {
                 String[] dados = linha.split(";");
-                Produto produto = new Produto(dados[0], dados[1], dados[2], Integer.parseInt(dados[3]), Double.parseDouble(dados[4]));
-                produtos.add(produto);
+                if (dados.length == 4) {
+                    Produto produto = new Produto(dados[0], dados[1], Integer.parseInt(dados[2]),
+                            Double.parseDouble(dados[3]));
+                    produtos.add(produto);
+                } else {
+                    System.out.println("Formato inválido da linha: " + linha);
+                }
             }
             System.out.println("Dados carregados com sucesso!");
         } catch (IOException e) {
             System.out.println("Erro ao ler o arquivo: " + e.getMessage());
+        } catch (NumberFormatException e) {
+            System.out.println("Erro de formato numérico: " + e.getMessage());
         }
         return produtos;
     }
 }
-  

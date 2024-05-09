@@ -83,8 +83,6 @@ public class GerenciadorProdutos {
                     sc.nextLine();
 
                     Produto produto = new Produto(nome, unidade, grupo, quantidade, preco);
-                    System.out.println(produto);
-                    System.out.println(grupo);
                     produtos.add(produto);
                     break;
                 case 2:

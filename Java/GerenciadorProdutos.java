@@ -128,28 +128,6 @@ public class GerenciadorProdutos {
                 System.out.println("Quantidade: " + p.getQuantidade());
                 System.out.println("Preço: " + p.getPreco());
                 encontrado = true;
-                break;
-            }
-        }
-        if (!encontrado) {
-            System.out.println("Produto não encontrado.");
-        }
-    }
-
-    /*
-public static void consultarProduto(Scanner sc, List<Produto> produtos) {
-        System.out.print("Digite o nome do produto que deseja consultar: ");
-        String nomeConsulta = sc.nextLine();
-        boolean encontrado = false;
-        for (Produto p : produtos) {
-            if (p.getNome().equalsIgnoreCase(nomeConsulta)) {
-                encontrado = true;
-                System.out.println("Produto encontrado:");
-                System.out.println("Nome: " + p.getNome());
-                System.out.println("Unidade: " + p.getUnidade());
-                System.out.println("Quantidade: " + p.getQuantidade());
-                System.out.println("Preço: " + p.getPreco());
-
                 System.out.print("Deseja alterar algum dado (S/N)? ");
                 String resposta = sc.nextLine();
                 if (resposta.equalsIgnoreCase("S")) {
@@ -182,7 +160,8 @@ public static void consultarProduto(Scanner sc, List<Produto> produtos) {
         if (!encontrado) {
             System.out.println("Produto não encontrado.");
         }
-    */
+    }
+
     public static void removerProduto(Scanner sc, List<Produto> produtos) {
         System.out.print("Digite o nome do produto a ser removido: ");
         String nome = sc.nextLine();

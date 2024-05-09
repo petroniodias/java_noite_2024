@@ -136,6 +136,53 @@ public class GerenciadorProdutos {
         }
     }
 
+    /*
+public static void consultarProduto(Scanner sc, List<Produto> produtos) {
+        System.out.print("Digite o nome do produto que deseja consultar: ");
+        String nomeConsulta = sc.nextLine();
+        boolean encontrado = false;
+        for (Produto p : produtos) {
+            if (p.getNome().equalsIgnoreCase(nomeConsulta)) {
+                encontrado = true;
+                System.out.println("Produto encontrado:");
+                System.out.println("Nome: " + p.getNome());
+                System.out.println("Unidade: " + p.getUnidade());
+                System.out.println("Quantidade: " + p.getQuantidade());
+                System.out.println("Preço: " + p.getPreco());
+
+                System.out.print("Deseja alterar algum dado (S/N)? ");
+                String resposta = sc.nextLine();
+                if (resposta.equalsIgnoreCase("S")) {
+                    System.out.print("Digite o nome do dado que deseja alterar (nome, unidade, quantidade, preco): ");
+                    String dado = sc.nextLine();
+                    switch (dado.toLowerCase()) {
+                        case "nome":
+                            System.out.print("Digite o novo nome: ");
+                            p.setNome(sc.nextLine());
+                            break;
+                        case "unidade":
+                            System.out.print("Digite a nova unidade: ");
+                            p.setUnidade(sc.nextLine());
+                            break;
+                        case "quantidade":
+                            System.out.print("Digite a nova quantidade: ");
+                            p.setQuantidade(sc.nextInt());
+                            break;
+                        case "preco":
+                            System.out.print("Digite o novo preço: ");
+                            p.setPreco(sc.nextDouble());
+                            break;
+                        default:
+                            System.out.println("Opção inválida");
+                    }
+                }
+                break;
+            }
+        }
+        if (!encontrado) {
+            System.out.println("Produto não encontrado.");
+        }
+    */
     public static void removerProduto(Scanner sc, List<Produto> produtos) {
         System.out.print("Digite o nome do produto a ser removido: ");
         String nome = sc.nextLine();

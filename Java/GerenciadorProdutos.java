@@ -12,12 +12,14 @@ class Produto {
     private String unidade;
     private int quantidade;
     private double preco;
+    private String grupo;
 
-    public Produto(String nome, String unidade, int quantidade, double preco) {
+    public Produto(String nome, String unidade, String grupo, int quantidade, double preco) {
         this.nome = nome;
         this.unidade = unidade;
         this.quantidade = quantidade;
         this.preco = preco;
+        this.grupo = grupo;
     }
 
     public String getNome() {
@@ -36,9 +38,13 @@ class Produto {
         return preco;
     }
 
+    public String getGrupo() {
+        return grupo;
+    }
+
     @Override
     public String toString() {
-        return nome + ";" + unidade + ";" + quantidade + ";" + preco;
+        return nome + ";" + unidade + ";" + grupo + ";" + quantidade + ";" + preco ;
     }
 }
 
@@ -68,18 +74,22 @@ public class GerenciadorProdutos {
                     }
                     System.out.print("Digite a unidade: ");
                     String unidade = sc.nextLine();
+                    System.out.print("Digite a grupo: ");
+                    String grupo = sc.nextLine();
                     System.out.print("Digite a quantidade: ");
                     int quantidade = sc.nextInt();
                     System.out.print("Digite o preco: ");
                     double preco = sc.nextDouble();
                     sc.nextLine();
 
-                    Produto produto = new Produto(nome, unidade, quantidade, preco);
+                    Produto produto = new Produto(nome, unidade, grupo, quantidade, preco);
+                    System.out.println(produto);
+                    System.out.println(grupo);
                     produtos.add(produto);
                     break;
                 case 2:
                     for (Produto p : produtos) {
-                        System.out.println(p);
+                        System.out.println(p.toString());
                     }
                     break;
                 case 3:
@@ -121,7 +131,7 @@ public class GerenciadorProdutos {
             String linha;
             while ((linha = reader.readLine()) != null) {
                 String[] dados = linha.split(";");
-                Produto produto = new Produto(dados[0], dados[1], Integer.parseInt(dados[2]), Double.parseDouble(dados[3]));
+                Produto produto = new Produto(dados[0], dados[1], dados[2], Integer.parseInt(dados[3]), Double.parseDouble(dados[4]));
                 produtos.add(produto);
             }
             System.out.println("Dados carregados com sucesso!");

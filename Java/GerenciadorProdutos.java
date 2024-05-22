@@ -291,10 +291,24 @@ public class GerenciadorProdutos {
         try (Connection conexao = DriverManager.getConnection(jdbcURL,jdbcUserName,jdbcPassword);
             Statement statement = conexao.createStatement()) {
             for (Produto p : produtos) {
-                String sql = "INSERT INTO tb_produtos (nome,unidade,quantidade,preco) ";
-                sql += "VALUES ('"+p.getNome()+"','"+p.getUnidade()+"',"+p.getQuantidade()+","+p.getPreco()+")";
-                statement.executeUpdate(sql);
-                System.out.println("Dados atualizados no banco de dados.");
+                String sql = "SELECT id,nome,unidade,quantidade,preco FROM tb_produtos ";
+                sql += "WHERE nome='"+p.getNome()+"' AND unidade='"+p.getUnidade()+"'";
+                System.out.println(sql);
+/*                try (Connection conexao = DriverManager.getConnection(jdbcURL,jdbcUserName,jdbcPassword);
+                    Statement statement = conexao.createStatement();
+                    ResultSet resultSet = statement.executeQuery(sql)) {
+                    if(resultSet.next()){
+                        // update
+                    } else {
+                        String sql = "INSERT INTO tb_produtos (nome,unidade,quantidade,preco) ";
+                        sql += "VALUES ('"+p.getNome()+"','"+p.getUnidade()+"',"+p.getQuantidade()+","+p.getPreco()+")";
+                        statement.executeUpdate(sql);
+                        System.out.println("Dados atualizados no banco de dados.");
+                    }
+                } catch (SQLException e) {
+                    System.out.println("Erro ao ler o banco de dados " + e.getMessage());
+                }
+*/
             }
         } catch (SQLException e) {
             System.out.println("Erro: " + e);

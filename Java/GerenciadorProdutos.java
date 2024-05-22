@@ -6,6 +6,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 class Produto {
     private String nome;
@@ -63,16 +68,20 @@ class Produto {
 public class GerenciadorProdutos {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int opcao = 0;
+        int opcao = -1;
         List<Produto> produtos = new ArrayList<>();
 
-        while (opcao != 6) {
+        while (opcao != 0) {
             System.out.println("1 - Cadastrar produto");
             System.out.println("2 - Listar produtos");
             System.out.println("3 - Consultar produto");
             System.out.println("4 - Remover produto");
-            System.out.println("5 - Carregar dados");
-            System.out.println("6 - Salvar e sair");
+            System.out.println("5 - Ordenar dados");
+            System.out.println("6 - Carregar dados do arquivo");
+            System.out.println("7 - Salvar no arquivo");
+            System.out.println("8 - Carregar dados do banco de dados");
+            System.out.println("9 - Salvar dados no banco de dados");
+            System.out.println("0 - Sair");
             System.out.print("Digite uma opção: ");
             opcao = sc.nextInt();
             sc.nextLine(); // Consumir a quebra de linha após a leitura do número
@@ -90,11 +99,22 @@ public class GerenciadorProdutos {
                 case 4: // Remover produto
                     removerProduto(sc, produtos);
                     break;
-                case 5: // Carregar dados do arquivo
+                case 5: // Ordenar dados
+                    ordenarProdutos(produtos);
+                    break;
+                case 6: // Carregar dados do arquivo
                     produtos = carregarDados("produtos.txt");
                     break;
-                case 6: // Salvar e sair
+                case 7: // Salvar e sair
                     salvarDados("produtos.txt", produtos);
+                    break;
+                case 8: // Carregar dados do banco de dados
+                    produtos = carregarDadosBD();
+                    break;
+                case 9: // Salvar dados no banco de dados
+                    salvarDadosBD(produtos);
+                    break;
+                case 0:
                     break;
                 default:
                     System.out.println("Opção inválida");
@@ -221,4 +241,64 @@ public class GerenciadorProdutos {
         }
         return produtos;
     }
+
+    public static void ordenarProdutos(List<Produto> produtos) {
+        int n = produtos.size();
+        for (int i=0;i<n-1;i++) {
+            for (int j=i+1;j<n;j++) {
+                if (produtos.get(i).getNome().compareToIgnoreCase(produtos.get(j).getNome()) > 0){
+                    Produto tmp = produtos.get(j);
+                    produtos.set(j,produtos.get(i));
+                    produtos.set(i,tmp);
+                }
+            }
+        }
+    }
+
+    public static List<Produto> carregarDadosBD(){
+        List<Produto> produtos = new ArrayList<>();
+        
+        String jdbcURL = "jdbc:mysql://localhost:3306/db_exemplo";
+        String jdbcUserName = "root";
+        String jdbcPassword = "";
+        String sql = "SELECT id,nome,unidade,quantidade,preco FROM tb_produtos";
+        
+        try (Connection conexao = DriverManager.getConnection(jdbcURL,jdbcUserName,jdbcPassword);
+            Statement statement = conexao.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql)) {
+            
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String nome = resultSet.getString("nome");
+                String unidade = resultSet.getString("unidade");
+                int quantidade = resultSet.getInt("quantidade");
+                double preco = resultSet.getDouble("preco");
+                Produto produto = new Produto(nome, unidade, quantidade,preco);
+                produtos.add(produto);
+            }
+            System.out.println("Dados carregados com sucesso!");
+        } catch (SQLException e) {
+            System.out.println("Erro ao ler o banco de dados " + e.getMessage());
+        }
+        return produtos;
+    }
+
+    public static void salvarDadosBD(List<Produto> produtos){
+        String jdbcURL = "jdbc:mysql://localhost:3306/db_exemplo";
+        String jdbcUserName = "root";
+        String jdbcPassword = "";
+
+        try (Connection conexao = DriverManager.getConnection(jdbcURL,jdbcUserName,jdbcPassword);
+            Statement statement = conexao.createStatement()) {
+            for (Produto p : produtos) {
+                String sql = "INSERT INTO tb_produtos (nome,unidade,quantidade,preco) ";
+                sql += "VALUES ('"+p.getNome()+"','"+p.getUnidade()+"',"+p.getQuantidade()+","+p.getPreco()+")";
+                statement.executeUpdate(sql);
+                System.out.println("Dados atualizados no banco de dados.");
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro: " + e);
+        }
+    }
+
 }

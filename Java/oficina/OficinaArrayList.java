@@ -156,7 +156,7 @@ class Servico {
     }
 }
 
-public class OficinaMecanica {
+public class OficinaArrayList {
     private static List<Cliente> clientes = new ArrayList<>();
     private static List<Veiculo> veiculos = new ArrayList<>();
     private static List<Servico> servicos = new ArrayList<>();

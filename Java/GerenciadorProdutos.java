@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -293,22 +294,36 @@ public class GerenciadorProdutos {
             for (Produto p : produtos) {
                 String sql = "SELECT id,nome,unidade,quantidade,preco FROM tb_produtos ";
                 sql += "WHERE nome='"+p.getNome()+"' AND unidade='"+p.getUnidade()+"'";
-                System.out.println(sql);
-/*                try (Connection conexao = DriverManager.getConnection(jdbcURL,jdbcUserName,jdbcPassword);
-                    Statement statement = conexao.createStatement();
-                    ResultSet resultSet = statement.executeQuery(sql)) {
-                    if(resultSet.next()){
-                        // update
+                //System.out.println(sql);
+                /*
+                    Pesquisar (consulta/select) o item pelo nome e unidade para ver se tem no banco.
+                    Se houver realizo um update
+                    Se não houver realizo um insert
+                */
+                try (Connection conn = DriverManager.getConnection(jdbcURL,jdbcUserName,jdbcPassword);
+                    Statement stmt = conn.createStatement(sql);
+                    ResultSet rs = stmt.executeQuery("SELECT id FROM tb_produtos WHERE ")) {
+                    if (rs.next()) {
+                        System.out.println("Produto existente");
+                        // fazer update
                     } else {
-                        String sql = "INSERT INTO tb_produtos (nome,unidade,quantidade,preco) ";
-                        sql += "VALUES ('"+p.getNome()+"','"+p.getUnidade()+"',"+p.getQuantidade()+","+p.getPreco()+")";
-                        statement.executeUpdate(sql);
-                        System.out.println("Dados atualizados no banco de dados.");
+                        System.out.println("Produto inexistente");
+                        // fazer insert
+                        try (Connection connItem = DriverManager.getConnection(jdbcURL,jdbcUserName,jdbcPassword);
+                            PreparedStatement stmtItem = connItem.prepareStatement("INSERT INTO tb_produtos (nome, unidade, quantidade, preco) VALUES (?, ?, ?, ?)")) {
+                            stmtItem.setString(1, p.getNome());
+                            stmtItem.setString(2, p.getUnidade());
+                            stmtItem.setInt(3, p.getQuantidade());
+                            stmtItem.setDouble(4, p.getPreco());
+                            stmtItem.executeUpdate();
+                            System.out.println("Produto adicionado com sucesso.");
+                        } catch (SQLException e) {
+                            System.out.println("Erro ao adicionar produto: " + e.getMessage());
+                        }
                     }
                 } catch (SQLException e) {
-                    System.out.println("Erro ao ler o banco de dados " + e.getMessage());
+                    System.out.println("Erro ao listar clientes: " + e.getMessage());
                 }
-*/
             }
         } catch (SQLException e) {
             System.out.println("Erro: " + e);

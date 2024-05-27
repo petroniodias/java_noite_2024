@@ -301,11 +301,25 @@ public class GerenciadorProdutos {
                     Se não houver realizo um insert
                 */
                 try (Connection conn = DriverManager.getConnection(jdbcURL,jdbcUserName,jdbcPassword);
-                    Statement stmt = conn.createStatement(sql);
-                    ResultSet rs = stmt.executeQuery("SELECT id FROM tb_produtos WHERE ")) {
+                    Statement stmt = conn.createStatement();
+                    ResultSet rs = stmt.executeQuery(sql)) {
                     if (rs.next()) {
                         System.out.println("Produto existente");
+                        int id = rs.getInt("id");
                         // fazer update
+                        // UPDATE `tb_produtos` SET `unidade` = 'G' WHERE `tb_produtos`.`id` = 10;
+                        try (Connection connItem = DriverManager.getConnection(jdbcURL,jdbcUserName,jdbcPassword);
+                        PreparedStatement stmtItem = connItem.prepareStatement("UPDATE tb_produtos SET nome=?, unidade=?, quantidade=?, preco=? WHERE id=?")) {
+                        stmtItem.setString(1, p.getNome());
+                        stmtItem.setString(2, p.getUnidade());
+                        stmtItem.setInt(3, p.getQuantidade());
+                        stmtItem.setDouble(4, p.getPreco());
+                        stmtItem.setInt(5, id);
+                        stmtItem.executeUpdate();
+                        System.out.println("Produto atualizado com sucesso.");
+                    } catch (SQLException e) {
+                        System.out.println("Erro ao atualizar produto: " + e.getMessage());
+                    }
                     } else {
                         System.out.println("Produto inexistente");
                         // fazer insert
@@ -322,7 +336,7 @@ public class GerenciadorProdutos {
                         }
                     }
                 } catch (SQLException e) {
-                    System.out.println("Erro ao listar clientes: " + e.getMessage());
+                    System.out.println("Erro ao acessar produto: " + e.getMessage());
                 }
             }
         } catch (SQLException e) {

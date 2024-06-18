@@ -1,9 +1,10 @@
 
 Criar projeto no start Spring
 Utilizar: 
+```
     group: br.com.cursojava
     artefact: cadastro
-    
+```    
 Abrir projeto no VSC
 Na pasta src\main criar:
 - Pasta model

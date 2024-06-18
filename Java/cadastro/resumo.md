@@ -12,7 +12,7 @@ Utilizar:
         MySQL Driver
 ```    
 Abrir projeto no VSC
-Na pasta src\main criar:
+Na pasta src\main\java\br\com\cursojava\cadastro criar:
 - Pasta model
 - Pasta repository
 - Pasta controller

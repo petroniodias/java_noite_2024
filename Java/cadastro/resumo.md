@@ -8,8 +8,8 @@ Utilizar:
 Abrir projeto no VSC
 Na pasta src\main criar:
 - Pasta model
-- Pasta controller
 - Pasta repository
+- Pasta controller
 
 ---
 Arquivo: model\Produto.java

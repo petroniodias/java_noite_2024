@@ -4,6 +4,12 @@ Utilizar:
 ```
     group: br.com.cursojava
     artefact: cadastro
+    Dependencies:
+        Spring Web
+        Spring Boot DevTools
+        Spring Data JPA
+        Lombok
+        MySQL Driver
 ```    
 Abrir projeto no VSC
 Na pasta src\main criar:

@@ -2,8 +2,8 @@ package br.com.cursojava.cadastro.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.cursojava.cadastro.model.Produto;
-import br.com.cursojava.cadastro.repository.ProdutoRepository;
+import br.com.cursojava.cadastro.model.Cliente;
+import br.com.cursojava.cadastro.repository.ClienteRepository;
 
 import java.util.List;
 
@@ -13,19 +13,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
-@RequestMapping("/produtos")
-public class ProdutoController {
+@RequestMapping("/clientes")
+public class ClienteController {
 
     @Autowired
-    private ProdutoRepository repositorio;
+    private ClienteRepository repositorio;
 
     @GetMapping
-    public List<Produto> listar(){
+    public List<Cliente> listar(){
         return repositorio.findAll();
     }
 
     @GetMapping(value = "/{id}")
-    public Produto listarId(@PathVariable Long id){
+    public Cliente listarId(@PathVariable Long id){
         return repositorio.findById(id).get();
     }
 }

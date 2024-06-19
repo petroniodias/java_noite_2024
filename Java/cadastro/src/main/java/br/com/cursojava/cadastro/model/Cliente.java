@@ -9,13 +9,13 @@ import lombok.Data;
 
 @Entity
 @Data
-public class Produto {
+public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)    
     private Long id;
 
     @Column(nullable = false)
-    private String descricao;
-    private String unidade;
-    private Double preco;
+    private String nome;
+    private String telefone;
+    private String email;
 }

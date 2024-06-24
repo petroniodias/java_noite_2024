@@ -84,7 +84,12 @@ public class ProdutoController {
     @GetMapping
     public List<Produto> listar(){
         return repositorio.findAll();
-    }    
+    }
+
+    @PostMapping
+    public Produto adicionar(@RequestBody Produto produto){
+        return repositorio.save(produto);
+    }
 }
 ```
 ---

@@ -90,6 +90,21 @@ public class ProdutoController {
     public Produto adicionar(@RequestBody Produto produto){
         return repositorio.save(produto);
     }
+
+    @PutMapping
+    public Produto alterar(@RequestBody Produto produto){
+        if(produto.getId() != null && produto.getId() > 0) {
+            Contato produtoExistente = repositorio.findById(produto.getId()).orElse(null);
+            if (produtoExistente != null) {
+                produtoExistente.setDescricao(produto.getDescricao());
+                produtoExistente.setUnidade(produto.getUnidade());
+                produtoExistente.setPreco(produto.getPreco());
+
+                return repositorio.save(produtoExistente);
+            }
+        }
+        return null;
+    }
 }
 ```
 ---

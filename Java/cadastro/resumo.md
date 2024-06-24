@@ -94,7 +94,7 @@ public class ProdutoController {
     @PutMapping
     public Produto alterar(@RequestBody Produto produto){
         if(produto.getId() != null && produto.getId() > 0) {
-            Contato produtoExistente = repositorio.findById(produto.getId()).orElse(null);
+            Produto produtoExistente = repositorio.findById(produto.getId()).orElse(null);
             if (produtoExistente != null) {
                 produtoExistente.setDescricao(produto.getDescricao());
                 produtoExistente.setUnidade(produto.getUnidade());

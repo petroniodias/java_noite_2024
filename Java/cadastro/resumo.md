@@ -72,6 +72,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -109,6 +110,15 @@ public class ProdutoController {
         return null;
     }
 
+    @DeleteMapping
+    public String excluir(@RequestBody Produto produto){
+            if(produto.getId()>0){
+                repositorio.delete(produto);
+                return "Produto removido com sucesso";
+            }
+        return "Produto não encontrado";
+    }
+
 }
 ```
 ---
@@ -130,7 +140,7 @@ http://localhost:8080/produtos
 Exemplo de JSON
 ```json
 {
-   	"id": 4,
+   	"id": 2,
 	"descricao": "Xis Bagunca",
 	"unidade": "Un",
 	"preco": 35.0

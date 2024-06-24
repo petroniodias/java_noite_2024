@@ -119,3 +119,21 @@ spring.datasource.username=root
 spring.datasource.password=
 spring.jpa.hibernate.ddl-auto=update
 ```
+
+---
+Chamadas aos endpoints
+
+Selecionar o método (GET/POST/PUT...)
+```
+http://localhost:8080/produtos
+```
+Exemplo de JSON
+```json
+{
+   	"id": 4,
+	"descricao": "Xis Bagunca",
+	"unidade": "Un",
+	"preco": 35.0
+}
+```
+

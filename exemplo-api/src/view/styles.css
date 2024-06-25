@@ -1,0 +1,33 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+#contatos-list {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+#adicionar-contato-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+#adicionar-contato-form label,
+#adicionar-contato-form input,
+#adicionar-contato-form button {
+    margin-bottom: 5px;
+}
+
+#adicionar-contato-form button {
+    padding: 5px 10px;
+}

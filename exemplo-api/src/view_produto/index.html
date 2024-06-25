@@ -1,0 +1,68 @@
+<html>
+<head>
+    <title>Produtos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <section>
+        <h2>Lista de Produtos</h2>
+        <ul id="produtos-list"></ul>
+    </section>
+    
+    <section class="formularios">
+        <form id="adicionar-form">
+            <h2>Adicionar Produto</h2>
+            <div class="linha">
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" placeholder="Nome" required>
+            </div>
+            <div class="linha">
+                <label for="descricao">Descrição:</label>
+                <input type="text" id="descricao" placeholder="descricao" required>
+            </div>
+            <div class="linha">
+                <label for="unidade">Unidade:</label>
+                <input type="text" id="unidade" placeholder="unidade">
+            </div>
+            <div class="linha">
+                <label for="preco">Preço:</label>
+                <input type="text" id="preco" placeholder="preço">
+            </div>
+            <div class="linha">
+                <label for="quantidade">Quantidade:</label>
+                <input type="text" id="quantidade" placeholder="quantidade">
+            </div>
+            <button type="submit">Adicionar</button>
+        </form>
+        <form id="atualizar-form">
+            <h2>Atualizar Produto</h2>
+            <div class="linha">
+                <label for="id">Identificador:</label>
+                <input type="text" id="id" placeholder="Identificador" required>
+            </div>
+            <div class="linha">
+                <label for="nomeAtualizado">Nome:</label>
+                <input type="text" id="nomeAtualizado" placeholder="Nome" required>
+            </div>
+            <div class="linha">
+                <label for="descricaoAtualizada">Descrição:</label>
+                <input type="text" id="descricaoAtualizada" placeholder="descricao" required>
+            </div>
+            <div class="linha">
+                <label for="unidadeAtualizada">Unidade:</label>
+                <input type="text" id="unidadeAtualizada" placeholder="unidade">
+            </div>
+            <div class="linha">
+                <label for="precoAtualizado">Preço:</label>
+                <input type="text" id="precoAtualizado" placeholder="preço">
+            </div>
+            <div class="linha">
+                <label for="quantidadeAtualizada">Quantidade:</label>
+                <input type="text" id="quantidadeAtualizada" placeholder="quantidade">
+            </div>
+            <button type="submit">Atualizar</button>
+        </form>
+    </section>
+    <script src="script.js"></script>
+</body>
+</html>

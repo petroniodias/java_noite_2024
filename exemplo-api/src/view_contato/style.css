@@ -1,0 +1,160 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&family=Playfair:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.linha {
+    margin-top: 5%;
+    margin-bottom: 5%;
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    align-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.linha label {
+    margin-right: 0.1%;
+}
+input {
+    padding-right: 0.5vw;
+    padding-left: 0.5vw;
+    border: 1px solid black;
+    border-top-left-radius: 0.25vw;
+    border-bottom-right-radius: 0.25vw;
+    border-top-right-radius: 0.5vw;
+    border-bottom-left-radius: 0.5vw;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+.formularios {
+    padding-top: 2.5vh;
+    padding-bottom: 2.5vh;
+    width: 100vw;
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: 50vw 50vw;
+    align-items: start;
+    justify-content: center;
+    align-content: center;
+    justify-items: center;
+    box-shadow: 1px 1px 5px rgba(137, 43, 226, 0.726);
+}
+
+section form {
+    grid-row: 2/3;
+    width: 50%;
+    height: 100%;
+    justify-content: space-between;
+}
+
+#adicionar-form button, #atualizar-form button {
+    color: whitesmoke;
+    border: hidden;
+    border-radius: 0.5em;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding: 2.5%;
+    cursor: pointer;
+}
+#adicionar-form button {
+    background-color: blueviolet;
+}
+#atualizar-form button {
+    background-color: orangered;
+}
+
+#adicionar-form {
+    grid-column: 1/2;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+#atualizar-form {
+    grid-column: 2/3;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+table, td, tr {
+    border: 1px solid black;
+    text-align: center;
+    border-collapse: collapse;
+}
+table {
+    box-shadow: 3px 3px 5px rgba(255, 68, 0, 0.295);
+}
+td {
+    padding-top: 0.3vh;
+    padding-bottom: 0.3vh;
+    padding-left: 0.3vw;
+    padding-right: 0.3vw;
+}
+thead {
+    font-weight: bolder;
+}
+
+table button {
+    border: hidden;
+    cursor: pointer;
+    background-color: white;
+}
+
+#botaoEditar {
+    margin-right: 2.5px;
+    transition: 0.2s;
+}
+#botaoEditar:hover {
+    scale: 1.1;
+    color: orangered;
+}
+
+#botaoExcluir {
+    margin-left: 2.5px;
+    transition: 0.2s;
+}
+#botaoExcluir:hover {
+    scale: 1.1;
+    color: blueviolet;
+}
+
+#mostrarFormAtt {
+    color: whitesmoke;
+    background-color: orangered;
+    grid-column: 2/3;
+}
+
+.formularios button {
+    color: whitesmoke;
+    background-color: blueviolet;
+    cursor: pointer;
+    padding-left: 1vw;
+    padding-right: 1vw;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    border-radius: 0.5em;
+    border: hidden;
+}
+
+#inputSenha {
+    -webkit-text-security: disc !important;
+}

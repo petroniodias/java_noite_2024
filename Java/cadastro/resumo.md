@@ -9,8 +9,9 @@ Serviços REST: web services que fornecem APIs paraacesso a serviços /operaçõ
 - Utiliza o protocolo HTTP (verbos, cabeçallhos, códigos de respostas, etc.)
 - Pode ter como retorno diferentes tipos e fornatos de dados. Sendo os mais comuns Json e XML.
 
-## Ferramentas utilizadas
 --- 
+## Ferramentas utilizadas
+
 - Visual Studio Code
 - Extensão do VSC: Java Extension Pack
 - Extensão do VSC: Spring Boot Extension Pack
@@ -19,9 +20,10 @@ Serviços REST: web services que fornecem APIs paraacesso a serviços /operaçõ
 - Insomnia
 
   
-## Projeto de backend utilizando API com Spring Boot
 --- 
+## Projeto de backend utilizando API com Spring Boot
 Criar projeto no start Spring
+
 Utilizar: 
 ```
     group: br.com.cursojava
@@ -171,4 +173,5 @@ Exemplo de JSON
 }
 ```
 
+---
 ## Projeto de frontend consumindo API criada com Spring Boot

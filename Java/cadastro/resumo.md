@@ -1,6 +1,9 @@
 ## Introdução
 
+O desenvolvimento moderno de aplicaçõoes tem utilizado cada vez mas APIs. 
 > API - Application Programming Interface - É um conjutno de funções e padrões de programação que fornecem acesso para aplicativos ou plataformas. Atualmente tem sido amplamente utilizadas em ambiente WEB por meio dos Web Services REST.
+
+> O uso das APIs evitam que um desenvolvedor precise criar e instalar diferentes recursos para que sistemas ou aplicativos diferentes “conversem” entre si. Isso contribui para reduzir o tempo da integração e para liberar o uso da solução muito mais rápido. 
 
 Serviços REST: web services que fornecem APIs paraacesso a serviços /operações na web:
 - Utiliza o protocolo HTTP (verbos, cabeçallhos, códigos de respostas, etc.)

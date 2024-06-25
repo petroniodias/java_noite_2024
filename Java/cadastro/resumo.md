@@ -1,3 +1,22 @@
+## Introdução
+
+> API - Application Programming Interface - É um conjutno de funções e padrões de programação que fornecem acesso para aplicativos ou plataformas. Atualmente tem sido amplamente utilizadas em ambiente WEB por meio dos Web Services REST.
+
+Serviços REST: web services que fornecem APIs paraacesso a serviços /operações na web:
+- Utiliza o protocolo HTTP (verbos, cabeçallhos, códigos de respostas, etc.)
+- Pode ter como retorno diferentes tipos e fornatos de dados. Sendo os mais comuns Json e XML.
+
+## Ferramentas utilizadas
+
+- Visual Studio Code
+- Extensão do VSC: Java Extension Pack
+- Extensão do VSC: Spring Boot Extension Pack
+- Java SDK
+- Servidor de banco de dados MySQL
+- Insomnia
+
+  
+## Projeto de backend utilizando API com Spring Boot
 
 Criar projeto no start Spring
 Utilizar: 
@@ -147,3 +166,4 @@ Exemplo de JSON
 }
 ```
 
+## Projeto de front consumindo API criada com Spring Boot

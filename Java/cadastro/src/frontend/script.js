@@ -1,34 +1,26 @@
-$(document).ready(function() {
-    const form = $("#produto-form");
-    const produtoList = $("#produto-list");
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('produto-form');
+    const produtoList = document.getElementById('produto-list');
+    const apiUrl = 'http://localhost:8080/produtos';
 
-    // Fetch and display products on page load
-    fetch('http://localhost:8080/produtos')
-        .then(response => response.json())
-        .then(data => {
-            data.forEach(produto => {
-                addProdutoToDOM(produto);
-            });
-        });
-
-    form.on("submit", function(event) {
+    form.addEventListener('submit', function(event) {
         event.preventDefault();
 
-        const id = $("#produto-id").val();
-        const descricao = $("#descricao").val();
-        const unidade = $("#unidade").val();
-        const preco = $("#preco").val();
+        const id = document.getElementById('produto-id').value;
+        const descricao = document.getElementById('descricao').value;
+        const unidade = document.getElementById('unidade').value;
+        const preco = parseFloat(document.getElementById('preco').value);
 
         const produto = {
             id: id ? parseInt(id) : null,
             descricao,
             unidade,
-            preco: parseFloat(preco)
+            preco
         };
 
         if (id) {
             // Update product
-            fetch('http://localhost:8080/produtos', {
+            fetch(apiUrl, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
@@ -36,13 +28,13 @@ $(document).ready(function() {
                 body: JSON.stringify(produto)
             }).then(response => response.json())
               .then(updatedProduto => {
-                  $(`[data-id='${updatedProduto.id}']`).remove();
+                  document.querySelector(`[data-id='${updatedProduto.id}']`).remove();
                   addProdutoToDOM(updatedProduto);
-                  form[0].reset();
+                  form.reset();
               });
         } else {
             // Add new product
-            fetch('http://localhost:8080/produtos', {
+            fetch(apiUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -51,44 +43,68 @@ $(document).ready(function() {
             }).then(response => response.json())
               .then(newProduto => {
                   addProdutoToDOM(newProduto);
-                  form[0].reset();
+                  form.reset();
               });
         }
     });
 
-    function addProdutoToDOM(produto) {
-        const li = $(`
-            <li class="list-group-item" data-id="${produto.id}">
-                ${produto.descricao} - ${produto.unidade} - R$ ${produto.preco.toFixed(2)}
-                <div>
-                    <button class="btn btn-warning btn-sm" onclick="editProduto(${produto.id})">Editar</button>
-                    <button class="btn btn-danger btn-sm" onclick="deleteProduto(${produto.id})">Excluir</button>
-                </div>
-            </li>
-        `);
-        produtoList.append(li);
+    function loadProdutos() {
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                data.forEach(produto => {
+                    addProdutoToDOM(produto);
+                });
+            });
     }
 
-    window.editProduto = function(id) {
-        fetch(`http://localhost:8080/produtos/${id}`)
+    function addProdutoToDOM(produto) {
+        const li = document.createElement('li');
+        li.className = 'list-item';
+        li.setAttribute('data-id', produto.id);
+
+        const div = document.createElement('div');
+        div.textContent = `${produto.descricao} - ${produto.unidade} - R$ ${produto.preco.toFixed(2)}`;
+
+        const editButton = document.createElement('button');
+        editButton.className = 'edit-btn';
+        editButton.textContent = 'Editar';
+        editButton.onclick = () => editProduto(produto.id);
+
+        const deleteButton = document.createElement('button');
+        deleteButton.className = 'delete-btn';
+        deleteButton.textContent = 'Excluir';
+        deleteButton.onclick = () => deleteProduto(produto.id);
+
+        li.appendChild(div);
+        li.appendChild(editButton);
+        li.appendChild(deleteButton);
+
+        produtoList.appendChild(li);
+    }
+
+    function editProduto(id) {
+        fetch(`${apiUrl}/${id}`)
             .then(response => response.json())
             .then(produto => {
-                $("#produto-id").val(produto.id);
-                $("#descricao").val(produto.descricao);
-                $("#unidade").val(produto.unidade);
-                $("#preco").val(produto.preco);
+                document.getElementById('produto-id').value = produto.id;
+                document.getElementById('descricao').value = produto.descricao;
+                document.getElementById('unidade').value = produto.unidade;
+                document.getElementById('preco').value = produto.preco;
             });
-    };
+    }
 
-    window.deleteProduto = function(id) {
-        fetch('http://localhost:8080/produtos', {
+    function deleteProduto(id) {
+        fetch(apiUrl, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({ id })
         }).then(() => {
-            $(`[data-id='${id}']`).remove();
+            document.querySelector(`[data-id='${id}']`).remove();
         });
-    };
+    }
+
+    loadProdutos();
 });

@@ -11,7 +11,7 @@ import br.com.cursojava.clube.model.Socio;
 import br.com.cursojava.clube.repository.SocioRepository;
 
 @Controller
-@RequestMapping("/web/socios")
+@RequestMapping("/web/socio")
 public class SocioThymeleafController {
 
     @Autowired

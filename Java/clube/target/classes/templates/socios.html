@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Sócios</title>
+</head>
+<body>
+    <h1>Sócios</h1>
+    <table border="1">
+        <tr>
+            <th>Nome</th>
+            <th>CPF</th>
+            <th>Ações</th>
+        </tr>
+        <tr th:each="socio : ${socios}">
+            <td th:text="${socio.nome}">Nome</td>
+            <td th:text="${socio.cpf}">CPF</td>
+            <td>
+                <a th:href="@{/web/socios/edit(id=${socio.id})}">Editar</a>
+                <a th:href="@{/web/socios/delete(id=${socio.id})}">Excluir</a>
+            </td>
+        </tr>
+    </table>
+    <a href="/web/socios/add">Adicionar Sócio</a>
+</body>
+</html>

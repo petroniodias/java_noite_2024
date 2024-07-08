@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Detalhes do Sócio</title>
+</head>
+<body>
+    <h1>Detalhes do Sócio</h1>
+    <p>ID: <span th:text="${socio.id}"></span></p>
+    <p>Nome: <span th:text="${socio.nome}"></span></p>
+    <p>Endereço: <span th:text="${socio.endereco}"></span></p>
+    <p>CPF: <span th:text="${socio.cpf}"></span></p>
+    <p>Telefone: <span th:text="${socio.telefone}"></span></p>
+    <p>Email: <span th:text="${socio.email}"></span></p>
+    <a th:href="@{/web/socio}">Voltar</a>
+</body>
+</html>

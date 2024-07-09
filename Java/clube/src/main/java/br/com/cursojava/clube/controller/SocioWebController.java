@@ -43,6 +43,6 @@ public class SocioWebController {
     @PostMapping
     public String adicionar(Socio socio) {
         repositorio.save(socio);
-        return "redirect:/socio";
+        return "redirect:/web/socio";
     }
 }

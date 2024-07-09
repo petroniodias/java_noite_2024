@@ -5,27 +5,32 @@
 </head>
 <body>
     <h1>Lista de Sócios</h1>
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>Nome</th>
-            <th>Endereço</th>
-            <th>CPF</th>
-            <th>Telefone</th>
-            <th>Email</th>
-            <th>Ações</th>
-        </tr>
-        <tr th:each="socio : ${socios}">
-            <td th:text="${socio.id}"></td>
-            <td th:text="${socio.nome}"></td>
-            <td th:text="${socio.endereco}"></td>
-            <td th:text="${socio.cpf}"></td>
-            <td th:text="${socio.telefone}"></td>
-            <td th:text="${socio.email}"></td>
-            <td>
-                <a th:href="@{/web/socio/{id}(id=${socio.id})}">Ver</a>
-            </td>
-        </tr>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Endereço</th>
+                <th>CPF</th>
+                <th>Telefone</th>
+                <th>Email</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="socio : ${socios}">
+                <td th:text="${socio.id}"></td>
+                <td th:text="${socio.nome}"></td>
+                <td th:text="${socio.endereco}"></td>
+                <td th:text="${socio.cpf}"></td>
+                <td th:text="${socio.telefone}"></td>
+                <td th:text="${socio.email}"></td>
+                <td>
+                    <a th:href="@{/web/socio/editar/{id}(id=${socio.id})}">Editar</a> |
+                    <a th:href="@{/web/socio/excluir/{id}(id=${socio.id})}" onclick="return confirm('Tem certeza que deseja excluir este sócio?');">Excluir</a>
+                </td>
+            </tr>
+        </tbody>
     </table>
     <a th:href="@{/web/socio/novo}">Adicionar Novo Sócio</a>
 </body>

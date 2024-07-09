@@ -45,4 +45,37 @@ public class SocioWebController {
         repositorio.save(socio);
         return "redirect:/web/socio";
     }
+
+    @GetMapping("/editar/{id}")
+    public String editarSocioForm(@PathVariable Long id, Model model) {
+        Socio socio = repositorio.findById(id).orElse(null);
+        if (socio != null) {
+            model.addAttribute("socio", socio);
+            return "socio/edit";
+        }
+        return "redirect:/web/socio";
+    }
+
+    @PostMapping("/atualizar/{id}")
+    public String atualizarSocio(@PathVariable Long id, Socio socioAtualizado) {
+        Socio socio = repositorio.findById(id).orElse(null);
+        if (socio != null) {
+            socio.setNome(socioAtualizado.getNome());
+            socio.setEndereco(socioAtualizado.getEndereco());
+            socio.setCpf(socioAtualizado.getCpf());
+            socio.setTelefone(socioAtualizado.getTelefone());
+            socio.setEmail(socioAtualizado.getEmail());
+            repositorio.save(socio);
+        }
+        return "redirect:/web/socio";
+    }
+
+    @GetMapping("/excluir/{id}")
+    public String excluirSocio(@PathVariable Long id) {
+        Socio socio = repositorio.findById(id).orElse(null);
+        if (socio != null) {
+            repositorio.delete(socio);
+        }
+        return "redirect:/web/socio";
+    }
 }

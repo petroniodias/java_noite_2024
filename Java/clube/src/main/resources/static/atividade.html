@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Atividades</title>
+    <link rel="stylesheet" href="/css/atividade-styles.css">
+</head>
+<body>
+    <header>
+        <h1>Lista de Atividades</h1>
+    </header>
+    <main>
+        <button id="addAtividadeBtn">Adicionar Atividade</button>
+        <table id="atividadeTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Descrição</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Conteúdo será preenchido pelo JavaScript -->
+            </tbody>
+        </table>
+    </main>
+
+    <!-- Modal para adicionar atividade -->
+    <div id="addModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Adicionar Atividade</h2>
+            <form id="addForm">
+                <label for="addNome">Nome:</label>
+                <input type="text" id="addNome" required><br/>
+                <label for="addDescricao">Descrição:</label>
+                <textarea id="addDescricao" required></textarea><br/>
+                <button type="submit">Adicionar</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="/js/atividade-script.js"></script>
+</body>
+</html>

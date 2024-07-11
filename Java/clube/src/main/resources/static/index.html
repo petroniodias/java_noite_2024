@@ -11,6 +11,7 @@
         <h1>Lista de Sócios</h1>
     </header>
     <main>
+        <button id="addSocioBtn">Adicionar Sócio</button>
         <table id="socioTable">
             <thead>
                 <tr>
@@ -43,6 +44,27 @@
                 <label for="editEmail">Email:</label>
                 <input type="email" id="editEmail" required><br/>
                 <button type="submit">Salvar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal para adicionar sócio -->
+    <div id="addModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Adicionar Sócio</h2>
+            <form id="addForm">
+                <label for="addNome">Nome:</label>
+                <input type="text" id="addNome" required><br/>
+                <label for="addEndereco">Endereço:</label>
+                <input type="text" id="addEndereco" required><br/>
+                <label for="addCpf">CPF:</label>
+                <input type="text" id="addCpf" required><br/>
+                <label for="addTelefone">Telefone:</label>
+                <input type="text" id="addTelefone" required><br/>
+                <label for="addEmail">Email:</label>
+                <input type="email" id="addEmail" required><br/>
+                <button type="submit">Adicionar</button>
             </form>
         </div>
     </div>

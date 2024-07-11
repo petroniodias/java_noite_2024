@@ -71,8 +71,14 @@ Este projeto é uma aplicação web para gerenciar sócios e atividades de um cl
 
     A aplicação frontend está embutida no backend. Você pode acessar as páginas HTML diretamente:
 
-    - Página de Listagem de Sócios: [http://localhost:8080/socios.html](http://localhost:8080/socios.html)
-    - Página de Listagem de Atividades: [http://localhost:8080/atividade.html](http://localhost:8080/atividade.html)
+    - **Páginas geradas com Thymeleaf:**
+      - Página de Listagem de Sócios: [http://localhost:8080/web/socio](http://localhost:8080/web/socio)
+      - Página de Formulário para Novo Sócio: [http://localhost:8080/web/socio/novo](http://localhost:8080/web/socio/novo)
+      - Página de Detalhes do Sócio: [http://localhost:8080/web/socio/{id}](http://localhost:8080/web/socio/{id})
+    
+    - **Páginas estáticas:**
+      - Página de Listagem de Sócios: [http://localhost:8080/socios.html](http://localhost:8080/socios.html)
+      - Página de Listagem de Atividades: [http://localhost:8080/atividade.html](http://localhost:8080/atividade.html)
 
 ## Estrutura de Arquivos Importantes
 

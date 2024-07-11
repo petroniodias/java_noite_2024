@@ -79,6 +79,40 @@ document.getElementById('editForm').addEventListener('submit', function(event) {
     .catch(error => console.error('Erro ao atualizar sócio:', error));
 });
 
-document.querySelector('.close').addEventListener('click', function() {
-    document.getElementById('editModal').style.display = 'none';
+document.getElementById('addForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const socio = {
+        nome: document.getElementById('addNome').value,
+        endereco: document.getElementById('addEndereco').value,
+        cpf: document.getElementById('addCpf').value,
+        telefone: document.getElementById('addTelefone').value,
+        email: document.getElementById('addEmail').value
+    };
+
+    fetch('/socio', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(socio),
+    })
+    .then(response => {
+        if (response.ok) {
+            location.reload();
+        } else {
+            alert('Erro ao adicionar sócio');
+        }
+    })
+    .catch(error => console.error('Erro ao adicionar sócio:', error));
+});
+
+document.querySelectorAll('.close').forEach(closeButton => {
+    closeButton.addEventListener('click', function() {
+        document.getElementById('editModal').style.display = 'none';
+        document.getElementById('addModal').style.display = 'none';
+    });
+});
+
+document.getElementById('addSocioBtn').addEventListener('click', function() {
+    document.getElementById('addModal').style.display = 'block';
 });

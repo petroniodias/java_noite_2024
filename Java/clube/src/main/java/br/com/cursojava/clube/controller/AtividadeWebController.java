@@ -10,41 +10,62 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import br.com.cursojava.clube.model.Socio;
-import br.com.cursojava.clube.repository.SocioRepository;
+import br.com.cursojava.clube.model.Atividade;
+import br.com.cursojava.clube.repository.AtividadeRepository;
 
 @Controller
-@RequestMapping("/web/socio")
-public class SocioWebController {
+@RequestMapping("/web/atividade")
+public class AtividadeWebController {
 
     @Autowired
-    private SocioRepository repositorio;
+    private AtividadeRepository repositorio;
 
     @GetMapping
     public String listar(Model model){
-        List<Socio> socios = repositorio.findAll();
-        model.addAttribute("socios", socios);
-        return "socio/list";
+        List<Atividade> atividades = repositorio.findAll();
+        model.addAttribute("atividades", atividades);
+        return "atividade/list";
     }
     
     @GetMapping(value = "/{id}")
     public String listarId(@PathVariable Long id, Model model){
-        Socio socio = repositorio.findById(id).orElse(null);
-        model.addAttribute("socio", socio);
-        return "socio/detail";
+        Atividade atividade = repositorio.findById(id).orElse(null);
+        model.addAttribute("atividade", atividade);
+        return "atividade/detail";
     }
 
-    @GetMapping("/novo")
-    public String novoSocioForm(Model model) {
-        model.addAttribute("socio", new Socio());
-        return "socio/form";
+    
+    @GetMapping("/nova")
+    public String novaAtividadeForm(Model model) {
+        model.addAttribute("atividade", new Atividade());
+        return "atividade/form";
     }
 
     @PostMapping
-    public String adicionar(Socio socio) {
-        repositorio.save(socio);
-        return "redirect:/web/socio";
+    public String adicionar(Atividade atividade) {
+        repositorio.save(atividade);
+        return "redirect:/web/atividade";
     }
+
+    @GetMapping("/editar/{id}")
+    public String editarAtividadeForm(@PathVariable Long id, Model model) {
+        Atividade atividade = repositorio.findById(id).orElse(null);
+        if (atividade != null) {
+            model.addAttribute("atividade", atividade);
+            return "atividade/edit";
+        }
+        return "redirect:/web/atividade";
+    }
+
+    @GetMapping("/excluir/{id}")
+    public String excluirAtividade(@PathVariable Long id) {
+        Atividade atividade = repositorio.findById(id).orElse(null);
+        if (atividade != null) {
+            repositorio.delete(atividade);
+        }
+        return "redirect:/web/atividade";
+    }
+    /*
 
     @GetMapping("/editar/{id}")
     public String editarSocioForm(@PathVariable Long id, Model model) {
@@ -69,13 +90,5 @@ public class SocioWebController {
         }
         return "redirect:/web/socio";
     }
-
-    @GetMapping("/excluir/{id}")
-    public String excluirSocio(@PathVariable Long id) {
-        Socio socio = repositorio.findById(id).orElse(null);
-        if (socio != null) {
-            repositorio.delete(socio);
-        }
-        return "redirect:/web/socio";
-    }
+    */
 }
